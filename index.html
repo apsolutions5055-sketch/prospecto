@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prospecto — Wake Up to Your Best Leads</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black: #0a0a0a;
+  --white: #fafaf8;
+  --green: #00e87a;
+  --green-dim: #00c265;
+  --green-dark: #003d20;
+  --green-glow: rgba(0,232,122,0.12);
+  --gray: #1a1a1a;
+  --gray2: #242424;
+  --gray3: #333;
+  --muted: #666;
+  --muted2: #888;
+  --border: rgba(255,255,255,0.07);
+  --font-display: 'Manrope', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  border-bottom: 1px solid var(--border);
+  background: rgba(10,10,10,0.85);
+  backdrop-filter: blur(20px);
+  gap: 24px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+  justify-content: center;
+}
+
+.nav-links a {
+  font-size: 13px;
+  font-weight: 500;
+  color: #aaa;
+  text-decoration: none;
+  padding: 7px 14px;
+  border-radius: 100px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.06);
+}
+
+.nav-links a.active {
+  color: var(--green);
+}
+
+/* Mobile hamburger */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.nav-hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+.nav-mobile {
+  display: none;
+  position: fixed;
+  top: 65px; left: 0; right: 0;
+  background: rgba(10,10,10,0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px 24px;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 99;
+}
+
+.nav-mobile.open { display: flex; }
+
+.nav-mobile a {
+  font-size: 14px;
+  font-weight: 500;
+  color: #aaa;
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+.nav-mobile a:hover { color: var(--white); background: rgba(255,255,255,0.05); }
+.nav-mobile .nav-cta-mobile {
+  background: var(--green);
+  color: var(--black);
+  text-align: center;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+.nav-cta {
+  background: var(--green);
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 22px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.nav-cta:hover { background: var(--green-dim); transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 500px;
+  background: radial-gradient(ellipse, rgba(0,232,122,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--green-glow);
+  border: 1px solid rgba(0,232,122,0.25);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--green);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 1;
+  animation: fadeUp 0.5s 0.1s both;
+}
+
+.eyebrow-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  max-width: 900px;
+  opacity: 1;
+  animation: fadeUp 0.5s 0.2s both;
+}
+
+h1 em {
+  font-style: normal;
+  color: var(--green);
+}
+
+.hero-sub {
+  font-size: 18px;
+  font-weight: 300;
+  color: var(--muted2);
+  max-width: 540px;
+  margin-bottom: 32px;
+  line-height: 1.65;
+  opacity: 1;
+  animation: fadeUp 0.5s 0.3s both;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  opacity: 1;
+  animation: fadeUp 0.5s 0.4s both;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  padding: 16px 36px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--green-dim); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,232,122,0.25); }
+
+.btn-ghost {
+  font-size: 14px;
+  color: var(--muted2);
+  font-weight: 300;
+}
+
+.hero-proof {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-top: 40px;
+  opacity: 0;
+  animation: fadeUp 0.5s 0.6s forwards;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.proof-stat {
+  text-align: center;
+}
+
+.proof-num {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+
+.proof-num span { color: var(--green); }
+
+.proof-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.proof-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── HERO BACKGROUND ── */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(0,232,122,0.07) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 60%, rgba(0,232,122,0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 80% 40%, rgba(0,232,122,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+  animation: heroGlow 8s ease-in-out infinite alternate;
+}
+@keyframes heroGlow {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+.hero > * { position: relative; z-index: 1; }
+
+/* ── COUNTDOWN ── */
+.countdown-bar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(0,232,122,0.06);
+  border: 1px solid rgba(0,232,122,0.2);
+  border-radius: 100px;
+  padding: 8px 20px;
+  font-size: 13px;
+  color: #ccc;
+  margin-bottom: 20px;
+  opacity: 1;
+  animation: fadeUp 0.5s 0.05s both;
+}
+.countdown-bar .cd-dot { width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 1s ease-in-out infinite;flex-shrink:0; }
+.countdown-bar strong { color:var(--green);font-weight:700;font-family:var(--font-display);letter-spacing:0.03em; }
+
+/* ── SCROLL REVEAL ── */
+.reveal { opacity:0;transform:translateY(32px);transition:opacity 0.65s ease,transform 0.65s ease; }
+.reveal.visible { opacity:1;transform:translateY(0); }
+.reveal-delay-1 { transition-delay:0.1s; }
+.reveal-delay-2 { transition-delay:0.2s; }
+.reveal-delay-3 { transition-delay:0.3s; }
+.reveal-delay-4 { transition-delay:0.4s; }
+
+/* ── TESTIMONIALS ── */
+.testi-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px; }
+.testi-card { background:var(--gray2);border:1px solid var(--border);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:16px;transition:border-color 0.2s,transform 0.2s; }
+.testi-card:hover { border-color:rgba(0,232,122,0.25);transform:translateY(-3px); }
+.testi-stars { color:var(--green);font-size:13px;letter-spacing:2px; }
+.testi-quote { font-size:14px;color:#ddd;line-height:1.75;font-style:italic;flex:1; }
+.testi-author { display:flex;align-items:center;gap:12px; }
+.testi-avatar { width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:var(--black);flex-shrink:0; }
+.testi-name { font-size:13px;font-weight:600;color:var(--white); }
+.testi-role { font-size:12px;color:#888;margin-top:1px; }
+
+/* ── COMPARISON TABLE ── */
+.comp-table { width:100%;border-collapse:separate;border-spacing:0;border-radius:16px;overflow:hidden;border:1px solid var(--border);margin-top:48px; }
+.comp-table th { padding:16px 20px;font-size:12px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;background:var(--gray2);text-align:left;border-bottom:1px solid var(--border); }
+.comp-table th.you-col { background:rgba(0,232,122,0.1);color:var(--green);border-left:1px solid rgba(0,232,122,0.2);border-right:1px solid rgba(0,232,122,0.2); }
+.comp-table td { padding:14px 20px;font-size:13px;color:#bbb;border-bottom:1px solid var(--border);background:var(--gray); }
+.comp-table tr:last-child td { border-bottom:none; }
+.comp-table td.you-col { background:rgba(0,232,122,0.05);border-left:1px solid rgba(0,232,122,0.15);border-right:1px solid rgba(0,232,122,0.15);color:#ddd;font-weight:500; }
+.comp-table td.feature-col { font-weight:500;color:#ddd; }
+.comp-yes { color:var(--green);font-weight:700;font-size:16px; }
+.comp-no { color:#555;font-weight:700;font-size:16px; }
+.comp-partial { color:#f5a623;font-weight:600;font-size:13px; }
+
+/* ── CURSOR GLOW ── */
+#cursor-glow {
+  position: fixed;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(0,232,122,0.07) 0%, transparent 70%);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+/* ── FAQ ── */
+.faq-item {
+  background: var(--gray2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.faq-item:hover { border-color: rgba(0,232,122,0.2); }
+.faq-item.open { border-color: rgba(0,232,122,0.25); }
+
+.faq-q {
+  padding: 18px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  user-select: none;
+}
+
+.faq-arrow {
+  color: var(--green);
+  font-size: 18px;
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  font-size: 14px;
+  color: #bbb;
+  line-height: 1.75;
+  padding: 0 24px;
+  transition: max-height 0.35s ease, padding 0.35s ease;
+}
+.faq-item.open .faq-a { max-height: 200px; padding: 0 24px 20px; }
+
+/* ── TICKER ── */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+  background: var(--gray);
+}
+
+.ticker {
+  display: flex;
+  gap: 0;
+  animation: ticker 25s linear infinite;
+  white-space: nowrap;
+}
+
+.ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 32px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ticker-item .t-dot { color: var(--green); font-size: 18px; line-height: 1; }
+
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── SECTIONS ── */
+section {
+  position: relative;
+  z-index: 1;
+}
+
+.section-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 72px 48px;
+}
+
+/* ── HOW IT WORKS ── */
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.section-sub {
+  font-size: 17px;
+  font-weight: 300;
+  color: var(--muted2);
+  max-width: 520px;
+  line-height: 1.6;
+  margin-bottom: 64px;
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.step-card {
+  background: var(--gray);
+  padding: 36px 32px;
+  transition: background 0.2s;
+  position: relative;
+}
+.step-card:hover { background: var(--gray2); }
+
+.step-number {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.1em;
+  margin-bottom: 20px;
+}
+
+.step-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: var(--green-glow);
+  border: 1px solid rgba(0,232,122,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.step-card h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.step-card p {
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--muted2);
+  line-height: 1.6;
+}
+
+/* ── LEAD CARD DEMO ── */
+.demo-section {
+  background: var(--gray);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.demo-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 16px;
+}
+
+.demo-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.5vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.demo-desc {
+  font-size: 16px;
+  font-weight: 300;
+  color: var(--muted2);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.demo-points { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.demo-points li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--muted2);
+  font-weight: 300;
+}
+.demo-points li::before {
+  content: '';
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--green-glow);
+  border: 1px solid rgba(0,232,122,0.4);
+  flex-shrink: 0;
+  margin-top: 3px;
+  background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l3 3 5-6' stroke='%2300e87a' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Lead card */
+.lead-card-demo {
+  background: var(--gray2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.5);
+}
+
+.lead-card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lead-card-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted2);
+}
+
+.lead-badge {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: var(--green-glow);
+  color: var(--green);
+  border: 1px solid rgba(0,232,122,0.25);
+  font-weight: 500;
+}
+
+.lead-item {
+  padding: 20px;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.15s;
+  cursor: pointer;
+}
+.lead-item:hover { background: rgba(255,255,255,0.02); }
+.lead-item:last-child { border: none; }
+
+.lead-item-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.lead-company {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--white);
+}
+
+.lead-person {
+  font-size: 12px;
+  color: #bbb;
+  margin-top: 2px;
+}
+
+.score-ring {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: conic-gradient(var(--green) calc(var(--pct) * 1%), var(--gray3) 0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.score-ring::after {
+  content: '';
+  position: absolute;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--gray2);
+}
+
+.score-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--green);
+  position: relative;
+  z-index: 1;
+}
+
+.lead-reason {
+  font-size: 12px;
+  color: #ccc;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.lead-reason strong {
+  color: var(--green);
+  font-weight: 500;
+}
+
+.lead-tags {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.lead-tag {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 100px;
+  background: rgba(255,255,255,0.08);
+  color: #ddd;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* ── ROI CALCULATOR ── */
+.roi-section { background: var(--black); }
+
+.roi-card {
+  background: var(--gray);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.roi-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.roi-inputs {
+  padding: 48px;
+  border-right: 1px solid var(--border);
+}
+
+.roi-results {
+  padding: 48px;
+  background: var(--gray2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.roi-input-group {
+  margin-bottom: 32px;
+}
+
+.roi-input-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--muted2);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.roi-input-val {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--green);
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--gray3);
+  outline: none;
+  cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--green);
+  cursor: pointer;
+  box-shadow: 0 0 0 4px rgba(0,232,122,0.15);
+  transition: box-shadow 0.2s;
+}
+
+input[type=range]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 6px rgba(0,232,122,0.25);
+}
+
+.roi-big-num {
+  font-family: var(--font-display);
+  font-size: 56px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--green);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.roi-big-label {
+  font-size: 14px;
+  color: #ccc;
+  margin-bottom: 32px;
+  font-weight: 400;
+}
+
+.roi-breakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.roi-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.roi-row:last-child { border: none; padding: 0; }
+.roi-row-label { color: #ccc; font-weight: 400; }
+.roi-row-val { font-weight: 500; color: var(--white); }
+.roi-row-val.pos { color: var(--green); }
+
+.roi-bottom {
+  padding: 24px 48px;
+  border-top: 1px solid var(--border);
+  background: var(--green-glow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.roi-bottom-text {
+  font-size: 14px;
+  color: var(--muted2);
+  font-weight: 300;
+}
+
+.roi-bottom-text strong { color: var(--green); font-weight: 500; }
+
+/* ── PRICING ── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.price-card {
+  background: var(--gray);
+  padding: 40px 32px;
+  position: relative;
+  transition: background 0.2s;
+}
+.price-card:hover { background: var(--gray2); }
+.price-card.featured { background: var(--gray2); }
+
+.price-pop {
+  position: absolute;
+  top: -1px; left: 50%;
+  transform: translateX(-50%);
+  background: var(--green);
+  color: var(--black);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 14px;
+  border-radius: 0 0 10px 10px;
+}
+
+.price-plan {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.price-amount {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--white);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.price-amount span { font-size: 18px; color: var(--muted); font-weight: 400; }
+
+.price-period { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
+
+.price-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.price-features li {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--muted2);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.price-features li::before {
+  content: '✓';
+  color: var(--green);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.price-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--white);
+  letter-spacing: 0.02em;
+}
+.price-btn:hover { border-color: var(--green); color: var(--green); }
+.price-btn.featured-btn {
+  background: var(--green);
+  color: var(--black);
+  border-color: var(--green);
+}
+.price-btn.featured-btn:hover { background: var(--green-dim); }
+
+/* ── TRIAL BANNER ── */
+.trial-banner {
+  background: var(--green);
+  padding: 80px 48px;
+  text-align: center;
+}
+
+.trial-banner h2 {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--black);
+  margin-bottom: 16px;
+  line-height: 1.05;
+}
+
+.trial-banner p {
+  font-size: 17px;
+  color: rgba(0,0,0,0.6);
+  font-weight: 300;
+  margin-bottom: 36px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.trial-btn {
+  background: var(--black);
+  color: var(--green);
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 18px 48px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-block;
+  text-decoration: none;
+}
+.trial-btn:hover { transform: translateY(-3px); box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+
+.trial-note {
+  font-size: 13px;
+  color: rgba(0,0,0,0.45);
+  margin-top: 16px;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  padding: 40px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-note {
+  font-size: 12px;
+  color: #bbb;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .section-inner { padding: 48px 20px; }
+  .demo-grid { grid-template-columns: 1fr; }
+  .roi-top { grid-template-columns: 1fr; }
+  .roi-inputs { border-right: none; border-bottom: 1px solid var(--border); }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .trial-banner { padding: 60px 20px; }
+  footer { padding: 32px 20px; flex-direction: column; text-align: center; }
+  h1 { font-size: 42px; }
+  .hero-proof { gap: 20px; }
+  .proof-divider { display: none; }
+  .roi-big-num { font-size: 42px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-dot"></div>
+    Prospecto
+  </div>
+  <div class="nav-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#demo">See a lead</a>
+    <a href="#compare">Why Prospecto</a>
+    <a href="#vault">Sales Vault</a>
+    <a href="#roi">ROI Calculator</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#faq">FAQ</a>
+  </div>
+  <a href="#trial" class="nav-cta">Start free trial</a>
+  <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="nav-mobile" id="mobile-nav">
+  <a href="#how-it-works" onclick="closeMobileNav()">How it works</a>
+  <a href="#demo" onclick="closeMobileNav()">See a lead</a>
+  <a href="#compare" onclick="closeMobileNav()">Why Prospecto</a>
+  <a href="#vault" onclick="closeMobileNav()">Sales Vault</a>
+  <a href="#roi" onclick="closeMobileNav()">ROI Calculator</a>
+  <a href="#pricing" onclick="closeMobileNav()">Pricing</a>
+  <a href="#faq" onclick="closeMobileNav()">FAQ</a>
+  <a href="#trial" class="nav-cta-mobile" onclick="closeMobileNav()">Start free trial →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="countdown-bar"><span class="cd-dot"></span>⚡ Next lead batch delivered in <strong id="cd-timer">08:24:17</strong></div>
+  <div class="eyebrow"><div class="eyebrow-dot"></div>AI-powered lead qualification</div>
+  <h1>Wake up to your<br><em>best leads.</em><br>Every morning.</h1>
+  <p class="hero-sub">Stop hunting for leads manually. Our AI finds, researches and scores your best prospects overnight — so you start every day already knowing who to call.</p>
+  <div class="hero-actions">
+    <a href="#trial" class="btn-primary">Start 3-day free trial</a>
+    <span class="btn-ghost">No credit card required &nbsp;·&nbsp; Cancel anytime</span>
+  </div>
+  <div class="hero-proof">
+    <div class="proof-stat">
+      <div class="proof-num">30<span>+</span></div>
+      <div class="proof-label">Qualified leads/month</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-stat">
+      <div class="proof-num"><span>$</span>49</div>
+      <div class="proof-label">Per month, all-in</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-stat">
+      <div class="proof-num">0</div>
+      <div class="proof-label">Hours spent searching</div>
+    </div>
+    <div class="proof-divider"></div>
+    <div class="proof-stat">
+      <div class="proof-num">8<span>am</span></div>
+      <div class="proof-label">Leads in your inbox daily</div>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item"><span class="t-dot">·</span> AI Lead Scoring</span>
+    <span class="ticker-item"><span class="t-dot">·</span> Pain Point Analysis</span>
+    <span class="ticker-item"><span class="t-dot">·</span> Daily Digest Email</span>
+    <span class="ticker-item"><span class="t-dot">·</span> ICP Matching</span>
+    <span class="ticker-item"><span class="t-dot">·</span> 275M+ Company Database</span>
+    <span class="ticker-item"><span class="t-dot">·</span> 3-Day Free Trial</span>
+    <span class="ticker-item"><span class="t-dot">·</span> No Sales Calls</span>
+    <span class="ticker-item"><span class="t-dot">·</span> Instant ROI</span>
+    <span class="ticker-item"><span class="t-dot">·</span> AI Lead Scoring</span>
+    <span class="ticker-item"><span class="t-dot">·</span> Pain Point Analysis</span>
+    <span class="ticker-item"><span class="t-dot">·</span> Daily Digest Email</span>
+    <span class="ticker-item"><span class="t-dot">·</span> ICP Matching</span>
+    <span class="ticker-item"><span class="t-dot">·</span> 275M+ Company Database</span>
+    <span class="ticker-item"><span class="t-dot">·</span> 3-Day Free Trial</span>
+    <span class="ticker-item"><span class="t-dot">·</span> No Sales Calls</span>
+    <span class="ticker-item"><span class="t-dot">·</span> Instant ROI</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="how-it-works">
+  <div class="section-inner">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">Set it once.<br>Profit every morning.</h2>
+    <p class="section-sub">Three steps between you and a full pipeline — and two of them happen while you sleep.</p>
+    <div class="steps-grid reveal">
+      <div class="step-card">
+        <div class="step-number">STEP 01</div>
+        <div class="step-icon">🎯</div>
+        <h3>Set your ICP</h3>
+        <p>Tell us your ideal customer — industry, company size, job titles, location. Takes 5 minutes. You never touch it again.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">STEP 02</div>
+        <div class="step-icon">🤖</div>
+        <h3>AI works overnight</h3>
+        <p>Every night, our AI searches 275M+ companies, finds matches, researches each one and scores them 1–10 against your ICP.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">STEP 03</div>
+        <div class="step-icon">☀️</div>
+        <h3>Wake up and close</h3>
+        <p>8am — your daily lead digest hits your inbox. Up to 30 scored, researched leads with their pain points identified. Just reach out.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD CARD DEMO -->
+<section id="demo" class="demo-section">
+  <div class="section-inner">
+    <div class="demo-grid">
+      <div>
+        <div class="demo-label">What you actually get</div>
+        <h2 class="demo-title">Not just a name. A reason to call.</h2>
+        <p class="demo-desc">Every lead comes with AI-powered research — why they fit your ICP, what pain they're experiencing right now, and why they need you today.</p>
+        <ul class="demo-points">
+          <li>Company name, size, decision maker and direct LinkedIn</li>
+          <li>AI fit score out of 10 with detailed reasoning</li>
+          <li>Their current pain point — identified automatically</li>
+          <li>Why right now is the perfect time to reach out</li>
+        </ul>
+      </div>
+      <div class="lead-card-demo">
+        <div class="lead-card-header">
+          <span class="lead-card-title">Today's top leads · 8:00 AM</span>
+          <span class="lead-badge">Today's leads</span>
+        </div>
+        <div class="lead-item">
+          <div class="lead-item-top">
+            <div>
+              <div class="lead-company">Stackr Technologies</div>
+              <div class="lead-person">James Okafor · VP of Sales · 85 employees</div>
+            </div>
+            <div class="score-ring" style="--pct:90">
+              <span class="score-num">9</span>
+            </div>
+          </div>
+          <div class="lead-reason">Just posted <strong>3 SDR job listings</strong> this week. Currently using spreadsheets for pipeline tracking — <strong>high intent signal</strong> for your outreach tool.</div>
+          <div class="lead-tags">
+            <span class="lead-tag">Series A</span>
+            <span class="lead-tag">Hiring SDRs</span>
+            <span class="lead-tag">Sales Tech</span>
+            <span class="lead-tag">San Francisco</span>
+          </div>
+        </div>
+        <div class="lead-item">
+          <div class="lead-item-top">
+            <div>
+              <div class="lead-company">Meridian SaaS</div>
+              <div class="lead-person">Priya Nair · Head of Revenue · 42 employees</div>
+            </div>
+            <div class="score-ring" style="--pct:80">
+              <span class="score-num">8</span>
+            </div>
+          </div>
+          <div class="lead-reason">G2 reviews show <strong>users struggling with onboarding</strong>. No dedicated sales ops — founder-led sales team scaling fast. Perfect timing.</div>
+          <div class="lead-tags">
+            <span class="lead-tag">Seed Stage</span>
+            <span class="lead-tag">B2B SaaS</span>
+            <span class="lead-tag">Austin TX</span>
+          </div>
+        </div>
+        <div class="lead-item">
+          <div class="lead-item-top">
+            <div>
+              <div class="lead-company">Forte Analytics</div>
+              <div class="lead-person">Marcus Liu · CRO · 120 employees</div>
+            </div>
+            <div class="score-ring" style="--pct:70">
+              <span class="score-num">7</span>
+            </div>
+          </div>
+          <div class="lead-reason">Recently rebranded and <strong>entering new market segment</strong>. Will need fresh sales collateral and outreach strategy immediately.</div>
+          <div class="lead-tags">
+            <span class="lead-tag">Growth Stage</span>
+            <span class="lead-tag">Analytics</span>
+            <span class="lead-tag">New York</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROI CALCULATOR -->
+<section id="roi" class="roi-section">
+  <div class="section-inner">
+    <div class="section-label">ROI calculator</div>
+    <h2 class="section-title">See your return<br>before you subscribe.</h2>
+    <p class="section-sub">Drag the sliders. Watch the math do the selling. Most users see 100x ROI in their first month.</p>
+    <div class="roi-card">
+      <div class="roi-top">
+        <div class="roi-inputs">
+          <h3 style="font-family:var(--font-display);font-size:20px;font-weight:700;margin-bottom:32px;letter-spacing:-0.02em">Your numbers</h3>
+          <div class="roi-input-group">
+            <div class="roi-input-label">
+              <span>Avg deal / commission value</span>
+              <span class="roi-input-val" id="v-deal">$500</span>
+            </div>
+            <input type="range" min="100" max="10000" step="100" value="500" id="s-deal" oninput="calcROI()">
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-input-label">
+              <span>Your closing rate</span>
+              <span class="roi-input-val" id="v-close">10%</span>
+            </div>
+            <input type="range" min="1" max="60" step="1" value="10" id="s-close" oninput="calcROI()">
+          </div>
+          <div class="roi-input-group">
+            <div class="roi-input-label">
+              <span>Leads delivered per day</span>
+              <span class="roi-input-val" id="v-leads">15</span>
+            </div>
+            <input type="range" min="5" max="50" step="5" value="15" id="s-leads" oninput="calcROI()">
+          </div>
+          <div class="roi-input-group" style="margin:0">
+            <div class="roi-input-label">
+              <span>Working days per month</span>
+              <span class="roi-input-val" id="v-days">22</span>
+            </div>
+            <input type="range" min="10" max="30" step="1" value="22" id="s-days" oninput="calcROI()">
+          </div>
+        </div>
+        <div class="roi-results">
+          <div class="roi-big-num" id="r-roi">2,234%</div>
+          <div class="roi-big-label">Return on investment</div>
+          <div class="roi-breakdown">
+            <div class="roi-row">
+              <span class="roi-row-label">Qualified leads / month</span>
+              <span class="roi-row-val" id="r-leads">330</span>
+            </div>
+            <div class="roi-row">
+              <span class="roi-row-label">Deals closed</span>
+              <span class="roi-row-val" id="r-deals">33</span>
+            </div>
+            <div class="roi-row">
+              <span class="roi-row-label">Revenue generated</span>
+              <span class="roi-row-val pos" id="r-rev">$16,500</span>
+            </div>
+            <div class="roi-row">
+              <span class="roi-row-label">Your subscription</span>
+              <span class="roi-row-val">$49 / mo</span>
+            </div>
+            <div class="roi-row">
+              <span class="roi-row-label">Net profit</span>
+              <span class="roi-row-val pos" id="r-net">$16,451</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="roi-bottom">
+        <div class="roi-bottom-text">For every <strong>$1</strong> you spend, you make back <strong id="r-multiple">336x</strong>. The subscription pays for itself on your <strong>very first deal.</strong></div>
+        <a href="#trial" class="nav-cta">Start free — see it live</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section id="compare" style="background:var(--black);border-top:1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-label reveal">Why switch</div>
+    <h2 class="section-title reveal reveal-delay-1">Prospecto vs the alternatives.</h2>
+    <p class="section-sub reveal reveal-delay-2">See exactly why 100+ salespeople switched from manual prospecting and Apollo.</p>
+    <div class="reveal reveal-delay-3">
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="width:32%">Feature</th>
+          <th class="you-col" style="width:22%">✦ Prospecto</th>
+          <th style="width:22%">Apollo.io</th>
+          <th style="width:24%">Manual Prospecting</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="feature-col">AI lead scoring 1–10</td>
+          <td class="you-col"><span class="comp-yes">✓</span></td>
+          <td><span class="comp-no">✗</span></td>
+          <td><span class="comp-no">✗</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Pain point analysis per lead</td>
+          <td class="you-col"><span class="comp-yes">✓</span></td>
+          <td><span class="comp-no">✗</span></td>
+          <td><span class="comp-no">✗</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Opening line written for you</td>
+          <td class="you-col"><span class="comp-yes">✓</span></td>
+          <td><span class="comp-no">✗</span></td>
+          <td><span class="comp-no">✗</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Daily inbox digest at 8am</td>
+          <td class="you-col"><span class="comp-yes">✓</span></td>
+          <td><span class="comp-no">✗</span></td>
+          <td><span class="comp-no">✗</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Fully automated — zero daily effort</td>
+          <td class="you-col"><span class="comp-yes">✓</span></td>
+          <td><span class="comp-no">✗</span></td>
+          <td><span class="comp-no">✗</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Sales Vault — scripts + objections</td>
+          <td class="you-col"><span class="comp-yes">✓</span></td>
+          <td><span class="comp-no">✗</span></td>
+          <td><span class="comp-no">✗</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">ICP-matched leads only</td>
+          <td class="you-col"><span class="comp-yes">✓</span></td>
+          <td><span class="comp-partial">Manual filter</span></td>
+          <td><span class="comp-partial">Manual filter</span></td>
+        </tr>
+        <tr>
+          <td class="feature-col">Time spent daily</td>
+          <td class="you-col" style="color:var(--green);font-weight:700;">0 minutes</td>
+          <td>2–4 hours</td>
+          <td>4–6 hours</td>
+        </tr>
+        <tr>
+          <td class="feature-col">Price per month</td>
+          <td class="you-col" style="color:var(--green);font-weight:700;">$49</td>
+          <td>$49–$99</td>
+          <td>Your time = $$$</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section style="background:var(--gray);border-top:1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-label reveal">What users say</div>
+    <h2 class="section-title reveal reveal-delay-1">Real results from<br>real salespeople.</h2>
+    <p class="section-sub reveal reveal-delay-2">These are the people who stopped hunting and started closing.</p>
+    <div class="testi-grid reveal reveal-delay-3">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"I closed a $2,800 deal in my first week using Prospecto. The AI didn't just give me a name — it told me exactly why this company needed me right now. I've never had a warmer cold call in my life."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:var(--green);">J</div>
+          <div>
+            <div class="testi-name">James Okafor</div>
+            <div class="testi-role">VP of Sales · SaaS · San Francisco</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"I was spending 3 hours every morning on Apollo finding leads. Now I wake up, read my digest over coffee, and I'm making calls by 8:30am. My pipeline doubled in 6 weeks. The Sales Vault alone is worth 10x the price."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#7c6af5;">M</div>
+          <div>
+            <div class="testi-name">Marcus Webb</div>
+            <div class="testi-role">Account Executive · B2B Tech · Austin</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-quote">"I run a 3-person agency. We plugged in our ICP on day one and woke up to 28 scored leads the next morning. Two became clients within 30 days. Prospecto paid for itself 40x over in the first month."</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:#f5a623;">S</div>
+          <div>
+            <div class="testi-name">Sarah Chen</div>
+            <div class="testi-role">Founder · Sales Agency · New York</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SALES VAULT -->
+<section id="vault" style="background: var(--black); border-top: 1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-label">Included with every plan</div>
+    <h2 class="section-title">Not just leads.<br>The full playbook<br>to close them.</h2>
+    <p class="section-sub">Every subscriber gets access to the Prospecto Sales Vault — 10 years of studying the world's greatest sales minds, compressed into 4 battle-tested documents.</p>
+
+    <!-- Author story -->
+    <div style="background:var(--gray2);border:1px solid var(--border);border-radius:16px;padding:28px 32px;margin-bottom:40px;display:flex;gap:24px;align-items:flex-start;">
+      <div style="width:48px;height:48px;border-radius:50%;background:var(--green-glow);border:2px solid rgba(0,232,122,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">📖</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:8px;letter-spacing:0.03em;">THE STORY BEHIND THE VAULT</div>
+        <p style="font-size:15px;color:#ddd;line-height:1.8;margin-bottom:12px;">Over 10 years I read every major sales book ever written. Jordan Belfort's Straight Line System. Grant Cardone's 10X philosophy. Jeremy Miner's NEPQ framework. Alex Hormozi's value equation. Brian Tracy, Tom Hopkins, Zig Ziglar, Dan Kennedy, Russell Brunson, Jeb Blount.</p>
+        <p style="font-size:15px;color:#ddd;line-height:1.8;">Then I spent a decade in the field — making calls, handling objections, closing deals, failing and winning. The Sales Vault is what survived. Every word written from scratch. Every technique field-tested. This is not a summary of their books — this is what actually works when you pick up the phone.</p>
+        <div style="margin-top:16px;font-size:13px;color:#aaa;font-style:italic;">— Akshay, Founder of Prospecto</div>
+      </div>
+    </div>
+
+    <!-- 4 vault docs -->
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:2px;background:var(--border);border:1px solid var(--border);border-radius:20px;overflow:hidden;">
+
+      <div style="background:var(--gray);padding:32px;transition:background 0.2s;" onmouseover="this.style.background='#242424'" onmouseout="this.style.background='#1a1a1a'">
+        <div style="font-size:28px;margin-bottom:16px;">📞</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Document 01</div>
+        <h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:10px;letter-spacing:-0.01em;">The Black Book Close</h3>
+        <p style="font-size:13px;color:#bbb;line-height:1.7;">A combined cold calling script built from the methodologies of 10 sales legends who made $10M+ each. Pattern interrupt → pain identification → solution bridge → assumptive close. Word for word. Ready to use today.</p>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Belfort</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Cardone</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Hormozi</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Miner</span>
+        </div>
+      </div>
+
+      <div style="background:var(--gray);padding:32px;transition:background 0.2s;" onmouseover="this.style.background='#242424'" onmouseout="this.style.background='#1a1a1a'">
+        <div style="font-size:28px;margin-bottom:16px;">🛡️</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Document 02</div>
+        <h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:10px;letter-spacing:-0.01em;">Objection Destruction</h3>
+        <p style="font-size:13px;color:#bbb;line-height:1.7;">"Too expensive." "Need to think about it." "Happy with my current provider." 7 fully scripted objection handlers — the exact words to say to turn every no into a yes. Open it on a second tab during your call.</p>
+        <div style="margin-top:16px;display:flex;flex-wrap:gap:6px;gap:6px;flex-wrap:wrap;">
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Hopkins</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Ziglar</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Belfort</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Miner</span>
+        </div>
+      </div>
+
+      <div style="background:var(--gray);padding:32px;transition:background 0.2s;" onmouseover="this.style.background='#242424'" onmouseout="this.style.background='#1a1a1a'">
+        <div style="font-size:28px;margin-bottom:16px;">🎯</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Document 03</div>
+        <h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:10px;letter-spacing:-0.01em;">Bulletproof Pre-Call Blueprint</h3>
+        <p style="font-size:13px;color:#bbb;line-height:1.7;">The 5-minute pre-call ritual top closers use. Vetting checklist, tonality guide, video call presence, mindset conditioning, and the 7 KPIs you must track weekly. Turns nervous callers into confident closers.</p>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Tracy</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Blount</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Cardone</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Ziglar</span>
+        </div>
+      </div>
+
+      <div style="background:var(--gray);padding:32px;transition:background 0.2s;" onmouseover="this.style.background='#242424'" onmouseout="this.style.background='#1a1a1a'">
+        <div style="font-size:28px;margin-bottom:16px;">🔄</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Document 04</div>
+        <h3 style="font-family:var(--font-display);font-size:18px;font-weight:700;margin-bottom:10px;letter-spacing:-0.01em;">Follow-Up Fortress</h3>
+        <p style="font-size:13px;color:#bbb;line-height:1.7;">80% of sales happen after the 5th follow-up. 44% of reps give up after 1. Full word-for-word sequences: 7-touch cold outreach, post-meeting nurture, ghosted prospect re-engagement, and multi-channel strategy.</p>
+        <div style="margin-top:16px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Kennedy</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Brunson</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Cardone</span>
+          <span style="font-size:10px;padding:2px 8px;border-radius:20px;background:rgba(0,232,122,0.08);color:var(--green);border:1px solid rgba(0,232,122,0.2);">Blount</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom value line -->
+    <div style="margin-top:24px;background:var(--green-glow);border:1px solid rgba(0,232,122,0.2);border-radius:14px;padding:20px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+      <p style="font-size:15px;color:#ddd;line-height:1.7;max-width:600px;">Apollo gives you a database. <strong style="color:var(--white);">Prospecto gives you the leads AND exactly what to say when they pick up.</strong> No other tool on the market does both.</p>
+      <a href="#trial" class="btn-primary" style="flex-shrink:0;">Get the vault free →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background: var(--gray); border-top: 1px solid var(--border);">
+  <div class="section-inner">
+
+    <!-- Founder pricing banner -->
+    <div style="background:linear-gradient(135deg,rgba(0,232,122,0.12),rgba(0,232,122,0.04));border:1px solid rgba(0,232,122,0.3);border-radius:16px;padding:24px 32px;margin-bottom:40px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;">
+      <div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:8px;">🏅 Founder Pricing — Limited to first 100 members</div>
+        <h3 style="font-family:var(--font-display);font-size:22px;font-weight:800;letter-spacing:-0.02em;margin-bottom:6px;">Lock in this price forever.</h3>
+        <p style="font-size:14px;color:#bbb;line-height:1.6;">After our first 100 founding members, prices increase to $79 / $149 / $349. Founding members keep today's price for life — regardless of future increases.</p>
+      </div>
+      <div style="text-align:center;flex-shrink:0;">
+        <div style="font-size:11px;color:#aaa;margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em;">Spots remaining</div>
+        <div style="font-family:var(--font-display);font-size:52px;font-weight:800;color:var(--green);line-height:1;" id="spots-left">87</div>
+        <div style="font-size:12px;color:#aaa;margin-top:2px;">out of 100</div>
+      </div>
+    </div>
+
+    <div class="section-label">Pricing</div>
+    <h2 class="section-title">Simple pricing.<br>Insane ROI.</h2>
+    <p class="section-sub">All plans include a 3-day free trial. No credit card required to start.</p>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-plan">Solo</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:2px;">
+          <div class="price-amount">$49<span>/mo</span></div>
+          <div style="font-size:12px;color:var(--muted);text-decoration:line-through;">$79</div>
+        </div>
+        <div class="price-period">founder price · locked for life</div>
+        <ul class="price-features">
+          <li>10–30 qualified leads per day</li>
+          <li>1 ICP profile</li>
+          <li>AI scoring + reasons</li>
+          <li>Daily email digest</li>
+          <li>Pain point analysis</li>
+          <li>Full Sales Vault access</li>
+          <li>CSV export</li>
+        </ul>
+        <button class="price-btn">Claim founder price</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-pop">Most popular</div>
+        <div class="price-plan">Pro</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:2px;">
+          <div class="price-amount">$99<span>/mo</span></div>
+          <div style="font-size:12px;color:var(--muted);text-decoration:line-through;">$149</div>
+        </div>
+        <div class="price-period">founder price · locked for life</div>
+        <ul class="price-features">
+          <li>30–50 qualified leads per day</li>
+          <li>3 ICP profiles</li>
+          <li>Everything in Solo</li>
+          <li>AI outreach copy per lead</li>
+          <li>Full Sales Vault access</li>
+          <li>CRM integrations</li>
+          <li>Priority support</li>
+        </ul>
+        <button class="price-btn featured-btn">Claim founder price</button>
+      </div>
+      <div class="price-card">
+        <div class="price-plan">Agency</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:2px;">
+          <div class="price-amount">$249<span>/mo</span></div>
+          <div style="font-size:12px;color:var(--muted);text-decoration:line-through;">$349</div>
+        </div>
+        <div class="price-period">founder price · locked for life</div>
+        <ul class="price-features">
+          <li>Unlimited leads daily</li>
+          <li>10 ICP profiles</li>
+          <li>5 team seats</li>
+          <li>Everything in Pro</li>
+          <li>Full Sales Vault access</li>
+          <li>White-label reports</li>
+          <li>Dedicated onboarding</li>
+        </ul>
+        <button class="price-btn">Claim founder price</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:var(--gray);border-top:1px solid var(--border);">
+  <div class="section-inner">
+    <div class="section-label reveal">FAQ</div>
+    <h2 class="section-title reveal reveal-delay-1">Questions we get<br>all the time.</h2>
+    <div style="display:flex;flex-direction:column;gap:4px;margin-top:48px;" class="reveal reveal-delay-2">
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Do I need to do anything daily to use Prospecto? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">Nothing. You set your ICP once — takes 5 minutes. After that, Prospecto runs every night automatically and your leads are waiting in your inbox at 8am. Zero daily effort required.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">How is this different from Apollo.io? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">Apollo is a database — you still have to search manually every day, filter, research each company, figure out the pain point, and write your own outreach. Prospecto does all of that automatically overnight. Apollo gives you a fishing lake. Prospecto delivers fresh fish every morning.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Where does the lead data come from? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">We source leads from a database of 275M+ companies and contacts. Our AI then cross-references public signals — job postings, funding rounds, news, tech stack, reviews — to score and research each lead before it reaches you.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">How accurate is the AI scoring? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">Our AI scores leads 1–10 based on how closely they match your ICP and how many buying signals they show. It's not perfect — no AI is. But it's consistently better than manual research because it processes dozens of signals simultaneously that a human would take hours to check.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">What is the Sales Vault? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">The Sales Vault is a set of 4 battle-tested sales documents built from 10 years of studying the world's top closers — Belfort, Cardone, Hormozi, Miner, Tracy, Hopkins, Ziglar, Kennedy, Brunson and Blount. It includes a cold calling script, objection handlers, pre-call blueprint, and follow-up sequences. Every subscriber gets full access.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">What happens after the 3-day free trial? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">After 3 days you're automatically moved to your selected plan and billed monthly. You can cancel anytime before the trial ends and you'll never be charged. No hidden fees, no contracts.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Is the founder pricing really locked forever? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">Yes. The first 100 founding members keep their price for life — even when we raise prices for new users. As long as your subscription stays active, your rate never changes. This is our commitment to early believers.</div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">Can I cancel anytime? <span class="faq-arrow">↓</span></div>
+        <div class="faq-a">Absolutely. Cancel from your account settings in 30 seconds. No calls, no forms, no friction. You keep access until the end of your billing period.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- TRIAL BANNER -->
+<section id="trial" class="trial-banner">
+  <h2>Your best leads are<br>waiting. Start today.</h2>
+  <p>3 days free. No credit card. Cancel anytime. Wake up tomorrow to your first qualified lead list.</p>
+  <a href="#" class="trial-btn">Claim my founder price now</a>
+  <div class="trial-note">Only <span id="spots-left-2">87</span> founding member spots left at this price. After that, prices go up permanently.</div>
+</section>
+
+<!-- LEGAL SECTION -->
+<section id="terms" style="background:var(--gray);border-top:1px solid var(--border);">
+  <div style="max-width:860px;margin:0 auto;padding:80px 48px;">
+    <div style="margin-bottom:40px;">
+      <p style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--green);margin-bottom:12px;">Legal</p>
+      <h2 style="font-family:var(--font-display);font-size:40px;font-weight:800;letter-spacing:-0.025em;margin-bottom:12px;">Policies &amp; Terms</h2>
+      <p style="font-size:15px;color:#aaa;line-height:1.6;">Everything you need to know about using Prospecto. Last updated January 1, 2025.</p>
+    </div>
+    <div style="display:flex;gap:4px;background:var(--gray2);padding:4px;border-radius:12px;margin-bottom:40px;width:fit-content;">
+      <button onclick="showTab('terms-content','tab-terms')" id="tab-terms" style="font-family:var(--font-body);font-size:13px;font-weight:600;padding:10px 24px;border-radius:9px;border:none;cursor:pointer;background:var(--green);color:var(--black);transition:all 0.2s;">Terms of Service</button>
+      <button onclick="showTab('privacy-content','tab-privacy')" id="tab-privacy" style="font-family:var(--font-body);font-size:13px;font-weight:600;padding:10px 24px;border-radius:9px;border:none;cursor:pointer;background:transparent;color:#aaa;transition:all 0.2s;">Privacy Policy</button>
+      <button onclick="showTab('refund-content','tab-refund')" id="tab-refund" style="font-family:var(--font-body);font-size:13px;font-weight:600;padding:10px 24px;border-radius:9px;border:none;cursor:pointer;background:transparent;color:#aaa;transition:all 0.2s;">Refund Policy</button>
+    </div>
+    <div id="terms-content">
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <div style="padding:24px 0;border-bottom:1px solid var(--border);"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">1. Acceptance of Terms</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">By accessing or using Prospecto ("the Service"), you agree to be bound by these Terms of Service. These terms apply to all users, visitors, and others who access or use the Service.</p></div>
+        <div style="padding:24px 0;border-bottom:1px solid var(--border);"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">2. Description of Service</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">Prospecto is an AI-powered lead qualification platform delivering daily scored sales leads based on your ICP. Plans start at $49/month.</p></div>
+        <div style="padding:24px 0;border-bottom:1px solid var(--border);"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">3. Subscriptions and Billing</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">All plans include a 3-day free trial. After the trial, billing is automatic monthly. Cancel anytime before trial ends to avoid charges. Payments processed via Paddle.</p></div>
+        <div style="padding:24px 0;border-bottom:1px solid var(--border);"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">4. User Responsibilities</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">You agree to use Prospecto lawfully. Do not resell, redistribute, or share account access. Do not use the Service for unsolicited bulk messaging or spam.</p></div>
+        <div style="padding:24px 0;border-bottom:1px solid var(--border);"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">5. Limitation of Liability</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">Prospecto is not liable for indirect or consequential damages. Our total liability shall not exceed the amount paid in the three months preceding any claim.</p></div>
+        <div style="padding:24px 0;"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">6. Contact</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">Questions? Email us at <a href="/cdn-cgi/l/email-protection#335b565f5f5c7343415c40435650475c1d5a5c" style="color:var(--green);text-decoration:none;"><span class="__cf_email__" data-cfemail="761e131a1a1936060419050613150219581f19">[email&#160;protected]</span></a></p></div>
+      </div>
+    </div>
+    <div id="privacy-content" style="display:none;">
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <div style="padding:24px 0;border-bottom:1px solid var(--border);"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">1. Information We Collect</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">We collect your name, email, payment information, ICP settings, and usage data such as leads saved or dismissed.</p></div>
+        <div style="padding:24px 0;border-bottom:1px solid var(--border);"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">2. How We Use It</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">To provide the Service, personalise your lead digest, process payments, and respond to support. We never sell your data. Ever.</p></div>
+        <div style="padding:24px 0;border-bottom:1px solid var(--border);"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">3. Third-Party Services</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">We use Paddle (payments), Apollo.io (lead data), and Anthropic (AI). Each has their own privacy policies.</p></div>
+        <div style="padding:24px 0;border-bottom:1px solid var(--border);"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">4. Your Rights</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">You can access, update, or delete your data at any time. Contact us and we'll respond within 30 days.</p></div>
+        <div style="padding:24px 0;"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">5. Contact</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">Privacy questions? <a href="/cdn-cgi/l/email-protection#28404d44444768585a475b584d4b5c47064147" style="color:var(--green);text-decoration:none;"><span class="__cf_email__" data-cfemail="731b161f1f1c3303011c00031610071c5d1a1c">[email&#160;protected]</span></a></p></div>
+      </div>
+    </div>
+    <div id="refund-content" style="display:none;">
+      <div style="display:flex;flex-direction:column;gap:0;">
+        <div style="padding:24px 0;border-bottom:1px solid var(--border);"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">1. Free Trial</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">All plans include a 3-day free trial. Cancel before trial ends and you will never be charged.</p></div>
+        <div style="padding:24px 0;border-bottom:1px solid var(--border);"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">2. Cancellations</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">Cancel anytime via account settings. Takes effect at end of billing period. No partial refunds for unused time.</p></div>
+        <div style="padding:24px 0;border-bottom:1px solid var(--border);"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">3. Refund Eligibility</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">Eligible if charged in error or Service was unavailable 48+ consecutive hours. Requests within 7 days of charge.</p></div>
+        <div style="padding:24px 0;"><h3 style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--white);margin-bottom:8px;">4. Contact</h3><p style="font-size:14px;color:#bbb;line-height:1.8;">Refund requests: <a href="/cdn-cgi/l/email-protection#2149444d4d4e6151534e52514442554e0f484e" style="color:var(--green);text-decoration:none;"><span class="__cf_email__" data-cfemail="dcb4b9b0b0b39cacaeb3afacb9bfa8b3f2b5b3">[email&#160;protected]</span></a></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="privacy" style="display:none;"></div>
+<div id="refund" style="display:none;"></div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="logo-dot"></div>
+    Prospecto
+  </div>
+  <div style="display:flex;gap:20px;align-items:center;flex-wrap:wrap;justify-content:center;">
+    <a href="#terms" style="font-size:12px;color:#bbb;text-decoration:none;">Terms of Service</a>
+    <a href="#privacy" style="font-size:12px;color:#bbb;text-decoration:none;">Privacy Policy</a>
+    <a href="#refund" style="font-size:12px;color:#bbb;text-decoration:none;">Refund Policy</a>
+  </div>
+  <div class="footer-note">© 2026 Prospecto · Built for salespeople, by a salesperson.</div>
+</footer>
+
+<!-- CURSOR GLOW -->
+<div id="cursor-glow"></div>
+
+<script>
+/* ── MOBILE NAV ── */
+function toggleMobileNav(){
+  var nav = document.getElementById('mobile-nav');
+  nav.classList.toggle('open');
+}
+function closeMobileNav(){
+  document.getElementById('mobile-nav').classList.remove('open');
+}
+
+/* ── FAQ TOGGLE ── */
+function toggleFaq(el){
+  var isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+  if(!isOpen) el.classList.add('open');
+}
+
+/* ── ACTIVE NAV LINK ON SCROLL ── */
+var sections = ['how-it-works','demo','compare','vault','roi','pricing','faq'];
+window.addEventListener('scroll', function(){
+  var scrollY = window.scrollY + 100;
+  sections.forEach(function(id){
+    var el = document.getElementById(id);
+    if(!el) return;
+    var link = document.querySelector('.nav-links a[href="#' + id + '"]');
+    if(!link) return;
+    if(scrollY >= el.offsetTop && scrollY < el.offsetTop + el.offsetHeight){
+      document.querySelectorAll('.nav-links a').forEach(function(a){ a.classList.remove('active'); });
+      link.classList.add('active');
+    }
+  });
+});
+
+function showTab(contentId, tabId) {
+  ['terms-content','privacy-content','refund-content'].forEach(function(id) {
+    document.getElementById(id).style.display = 'none';
+  });
+  ['tab-terms','tab-privacy','tab-refund'].forEach(function(id) {
+    var btn = document.getElementById(id);
+    btn.style.background = 'transparent';
+    btn.style.color = '#aaa';
+  });
+  document.getElementById(contentId).style.display = 'block';
+  var activeBtn = document.getElementById(tabId);
+  activeBtn.style.background = '#00e87a';
+  activeBtn.style.color = '#0a0a0a';
+}
+
+function fmt(n) {
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(1).replace(/\.0$/,'') + 'M';
+  if (n >= 1000) return '$' + (n/1000).toFixed(1).replace(/\.0$/,'') + 'k';
+  return '$' + Math.round(n);
+}
+
+function calcROI() {
+  const deal = parseInt(document.getElementById('s-deal').value);
+  const close = parseInt(document.getElementById('s-close').value);
+  const leads = parseInt(document.getElementById('s-leads').value);
+  const days = parseInt(document.getElementById('s-days').value);
+
+  document.getElementById('v-deal').textContent = deal >= 1000 ? '$' + (deal/1000).toFixed(1).replace(/\.0$/,'') + 'k' : '$' + deal;
+  document.getElementById('v-close').textContent = close + '%';
+  document.getElementById('v-leads').textContent = leads;
+  document.getElementById('v-days').textContent = days;
+
+  const totalLeads = leads * days;
+  const deals = Math.round(totalLeads * close / 100);
+  const rev = deals * deal;
+  const cost = 49;
+  const net = rev - cost;
+  const roi = Math.round((net / cost) * 100);
+  const multiple = Math.round(net / cost);
+
+  document.getElementById('r-leads').textContent = totalLeads.toLocaleString();
+  document.getElementById('r-deals').textContent = deals.toLocaleString();
+  document.getElementById('r-rev').textContent = fmt(rev);
+  document.getElementById('r-net').textContent = fmt(net);
+  document.getElementById('r-roi').textContent = roi.toLocaleString() + '%';
+  document.getElementById('r-multiple').textContent = multiple + 'x';
+}
+
+calcROI();
+
+/* ── COUNTING NUMBERS ── */
+function countUp(el, target, suffix, duration){
+  var start = 0;
+  var step = target / (duration / 16);
+  var timer = setInterval(function(){
+    start += step;
+    if(start >= target){
+      start = target;
+      clearInterval(timer);
+    }
+    el.textContent = Math.floor(start) + suffix;
+  }, 16);
+}
+
+var counted = false;
+function initCounters(){
+  if(counted) return;
+  counted = true;
+  var nums = document.querySelectorAll('.proof-num');
+  // 30+, $49, 0, 8am
+  if(nums[0]) countUp(nums[0], 30, '+', 1200);
+  if(nums[2]) countUp(nums[2], 0, '', 600);
+}
+
+/* ── COUNTDOWN TIMER ── */
+function updateCountdown(){
+  var now = new Date();
+  var next = new Date();
+  next.setHours(23, 0, 0, 0);
+  if(now >= next) next.setDate(next.getDate() + 1);
+  var diff = Math.floor((next - now) / 1000);
+  var h = Math.floor(diff / 3600);
+  var m = Math.floor((diff % 3600) / 60);
+  var s = diff % 60;
+  var el = document.getElementById('cd-timer');
+  if(el) el.textContent =
+    String(h).padStart(2,'0') + ':' +
+    String(m).padStart(2,'0') + ':' +
+    String(s).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+/* ── SCROLL REVEAL ── */
+var revealObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+      if(entry.target.closest('.hero-proof') || entry.target.classList.contains('hero-proof')){
+        initCounters();
+      }
+    }
+  });
+}, { threshold: 0.12 });
+
+document.querySelectorAll('.reveal').forEach(function(el){
+  revealObserver.observe(el);
+});
+
+/* Trigger counters when hero proof is visible */
+var proofObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting) initCounters(); });
+}, {threshold: 0.5});
+var heroProof = document.querySelector('.hero-proof');
+if(heroProof) proofObserver.observe(heroProof);
+
+/* ── CURSOR GLOW ── */
+var cursorGlow = document.getElementById('cursor-glow');
+var cursorVisible = false;
+document.addEventListener('mousemove', function(e){
+  cursorGlow.style.left = e.clientX + 'px';
+  cursorGlow.style.top = e.clientY + 'px';
+  if(!cursorVisible){
+    cursorGlow.style.opacity = '1';
+    cursorVisible = true;
+  }
+});
+document.addEventListener('mouseleave', function(){
+  cursorGlow.style.opacity = '0';
+  cursorVisible = false;
+});
+</script>
+</body>
+</html>
